@@ -1,12 +1,17 @@
 
 
-module.exports = (arr, limit) => {
-  const obj = { valid: [], expired: [] }
+module.exports = (arr, limit, soon = 0) => {
+  const obj = { valid: [], expired: [], soon: []}
   limit = parse(limit)
   arr.map(time => {
     time = parse(time)
-    if (time < limit) obj.valid.push(time)
-    else obj.expired.push(time)
+    if (time < limit) {
+      if ((limit - soon) <= time && time < limit) {
+        obj.soon.push(time)
+      } else {
+        obj.valid.push(time)
+      }
+    } else obj.expired.push(time)
   })
   return obj
 }
