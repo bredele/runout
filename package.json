@@ -1,13 +1,13 @@
 {
   "name": "runout",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Helper to know if something is running out of time or not",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
-  "engines" : {
-    "node" : ">8.0.0"
+  "engines": {
+    "node": ">8.0.0"
   },
   "scripts": {
     "test": "tape test/*.js"
@@ -30,5 +30,8 @@
   "homepage": "https://github.com/bredele/runout#readme",
   "devDependencies": {
     "tape": "^4.9.0"
+  },
+  "dependencies": {
+    "date-resolve": "^1.0.0"
   }
 }
