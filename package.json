@@ -16,6 +16,7 @@
   "keywords": [
     "expires",
     "timestamp",
+    "date",
     "time"
   ],
   "author": "Olivier Wietrich",
@@ -23,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/bredele/runout/issues"
   },
-  "homepage": "https://github.com/bredele/runout#readme"
+  "homepage": "https://github.com/bredele/runout#readme",
+  "devDependencies": {
+    "tape": "^4.9.0"
+  }
 }
