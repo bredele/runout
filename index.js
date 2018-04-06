@@ -1,5 +1,16 @@
 
 
+/**
+ * Given an expiration date, filter dates that are
+ * valid, expired or expire soon.
+ *
+ * @param {Array} arr
+ * @param {Number|Date|String} limit
+ * @param {Number} soon
+ * @return {Object}
+ * @api public
+ */
+
 module.exports = (arr, limit, soon = 0) => {
   const obj = { valid: [], expired: [], soon: []}
   limit = parse(limit)
@@ -16,6 +27,14 @@ module.exports = (arr, limit, soon = 0) => {
   return obj
 }
 
+
+/**
+ * Parse given time into a date in ms.
+ *
+ * @param {Date|Number|String} time
+ * @return {Number}
+ * @api private
+ */
 
 function parse (time) {
   return typeof time === 'number' ? time : Date.parse(time)

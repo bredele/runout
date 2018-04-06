@@ -6,7 +6,7 @@ const test = require('tape')
 const runout = require('..')
 
 
-test('should extract valid and expired dates from a given expiration limit', assert => {
+test('should filter valid and expired dates from a given expiration limit', assert => {
   assert.plan(1)
   const obj = runout([
     new Date('01-01-2000').getTime(),
@@ -51,7 +51,7 @@ test('should convert date strings into ms and sort them', assert => {
 })
 
 
-test('should extract dates that expire soon', assert => {
+test('should filter dates that expire soon', assert => {
   assert.plan(1)
   const obj = runout([
     new Date('01-01-2000'),
