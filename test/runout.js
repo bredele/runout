@@ -8,14 +8,15 @@ const runout = require('..')
 
 test('should filter valid and expired dates from a given expiration limit', assert => {
   assert.plan(1)
-  const obj = runout([
+  const dates = [
     new Date('01-01-2000').getTime(),
     new Date('01-01-2100').getTime(),
     new Date('01-01-2300').getTime(),
-  ], new Date('01-01-2101').getTime())
+  ]
+  const obj = runout(dates, new Date('01-01-2101').getTime())
   assert.deepEqual(obj, {
-    valid: [946710000000, 4102470000000],
-    expired: [10413817200000],
+    valid: [dates[0], dates[1]],
+    expired: [dates[2]],
     soon: []
   })
 })
@@ -23,14 +24,15 @@ test('should filter valid and expired dates from a given expiration limit', asse
 
 test('should convert dates in ms', assert => {
   assert.plan(1)
-  const obj = runout([
+  const dates = [
     new Date('01-01-2000'),
     new Date('01-01-2100'),
     new Date('01-01-2300'),
-  ], new Date('01-01-2101'))
+  ]
+  const obj = runout(dates, new Date('01-01-2101'))
   assert.deepEqual(obj, {
-    valid: [946710000000, 4102470000000],
-    expired: [10413817200000],
+    valid: [dates[0].getTime(), dates[1].getTime()],
+    expired: [dates[2].getTime()],
     soon: []
   })
 })
@@ -38,14 +40,15 @@ test('should convert dates in ms', assert => {
 
 test('should convert date strings into ms and sort them', assert => {
   assert.plan(1)
-  const obj = runout([
+  const dates = [
     new Date('01-01-2000'),
     '01-01-2100',
     new Date('01-01-2300'),
-  ], '01-01-2101')
+  ]
+  const obj = runout(dates, '01-01-2101')
   assert.deepEqual(obj, {
-    valid: [946710000000, 4102470000000],
-    expired: [10413817200000],
+    valid: [dates[0].getTime(), new Date(dates[1]).getTime()],
+    expired: [dates[2].getTime()],
     soon: []
   })
 })
@@ -53,16 +56,17 @@ test('should convert date strings into ms and sort them', assert => {
 
 test('should filter dates that expire soon', assert => {
   assert.plan(1)
-  const obj = runout([
+  const dates = [
     new Date('01-01-2000'),
     new Date('01-01-2100'),
     new Date('12-06-2100'),
     new Date('01-01-2300'),
-  ], new Date('01-01-2101'), oneyear())
+  ]
+  const obj = runout(dates, new Date('01-01-2101'), oneyear())
   assert.deepEqual(obj, {
-    valid: [946710000000],
-    expired: [10413817200000],
-    soon: [4102470000000, 4131759600000]
+    valid: [dates[0].getTime()],
+    expired: [dates[3].getTime()],
+    soon: [dates[1].getTime(), dates[2].getTime()]
   })
 })
 
