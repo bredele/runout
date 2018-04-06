@@ -6,6 +6,9 @@
   "directories": {
     "test": "test"
   },
+  "engines" : {
+    "node" : ">8.0.0"
+  },
   "scripts": {
     "test": "tape test/*.js"
   },
